@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upwork Net Kazanç Hesaplayıcı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-2xl shadow-xl w-80">
+        <h2 class="text-xl font-bold mb-4 text-green-600">Upwork Kesinti Hesabı</h2>
+        <input type="number" id="brut" placeholder="Proje Bedeli ($)" class="w-full p-2 border rounded mb-4">
+        <button onclick="hesap()" class="w-full bg-green-500 text-white py-2 rounded font-bold">Hesapla</button>
+        <div id="son" class="mt-4 text-sm space-y-2 hidden"></div>
+    </div>
+    <script>
+        function hesap() {
+            let b = document.getElementById('brut').value;
+            let net = b * 0.90; // %10 standart kesinti varsayımı
+            let s = document.getElementById('son');
+            s.classList.remove('hidden');
+            s.innerHTML = `Upwork Kesintisi: $${(b*0.10).toFixed(2)}<br><b>Elinize Geçecek: $${net.toFixed(2)}</b>`;
+        }
+    </script>
+</body>
+</html>
