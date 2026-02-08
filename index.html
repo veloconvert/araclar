@@ -2,26 +2,35 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Hızlı KDV Hesaplama Aracı</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        input { padding: 10px; margin: 10px; }
-        button { padding: 10px 20px; cursor: pointer; background: #28a745; color: white; border: none; }
-        #sonuc { margin-top: 20px; font-weight: bold; font-size: 1.2em; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Değer Kaybı Hesaplayıcı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>KDV Hesaplayıcı</h2>
-    <input type="number" id="fiyat" placeholder="Tutar girin">
-    <button onclick="hesapla()">Hesapla</button>
-    <div id="sonuc"></div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Para Değer Kaybı</h1>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Eldeki Nakit (TL)</label>
+                <input type="number" id="para" class="w-full p-3 border rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="10000">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Beklenen Yıllık Enflasyon (%)</label>
+                <input type="number" id="enflasyon" class="w-full p-3 border rounded-lg mt-1 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="50">
+            </div>
+            <button onclick="hesapla()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Hesapla</button>
+        </div>
+        <div id="sonuc" class="mt-6 p-4 bg-red-50 text-red-700 rounded-lg hidden"></div>
+    </div>
 
     <script>
         function hesapla() {
-            let f = document.getElementById('fiyat').value;
-            let kdv = f * 0.20;
-            let toplam = parseFloat(f) + kdv;
-            document.getElementById('sonuc').innerHTML = "KDV (%20): " + kdv.toFixed(2) + " TL<br>Toplam: " + toplam.toFixed(2) + " TL";
+            const p = document.getElementById('para').value;
+            const e = document.getElementById('enflasyon').value;
+            const kayip = p - (p / (1 + (e/100)));
+            const sonucDiv = document.getElementById('sonuc');
+            sonucDiv.classList.remove('hidden');
+            sonucDiv.innerHTML = `Paranızın 1 yıl sonraki alım gücü kaybı: <b>${kayip.toFixed(2)} TL</b>`;
         }
     </script>
 </body>
