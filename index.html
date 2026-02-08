@@ -1,8 +1,28 @@
 <!DOCTYPE html>
-<html>
-<head><title>Test Sayfası</title></head>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hızlı KDV Hesaplama Aracı</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        input { padding: 10px; margin: 10px; }
+        button { padding: 10px 20px; cursor: pointer; background: #28a745; color: white; border: none; }
+        #sonuc { margin-top: 20px; font-weight: bold; font-size: 1.2em; }
+    </style>
+</head>
 <body>
-    <h1>Sistem Çalışıyor</h1>
-    <p>Kırıntı toplama dükkanı yakında açılıyor.</p>
+    <h2>KDV Hesaplayıcı</h2>
+    <input type="number" id="fiyat" placeholder="Tutar girin">
+    <button onclick="hesapla()">Hesapla</button>
+    <div id="sonuc"></div>
+
+    <script>
+        function hesapla() {
+            let f = document.getElementById('fiyat').value;
+            let kdv = f * 0.20;
+            let toplam = parseFloat(f) + kdv;
+            document.getElementById('sonuc').innerHTML = "KDV (%20): " + kdv.toFixed(2) + " TL<br>Toplam: " + toplam.toFixed(2) + " TL";
+        }
+    </script>
 </body>
 </html>
